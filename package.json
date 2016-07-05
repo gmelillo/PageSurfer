@@ -1,6 +1,6 @@
 {
   "name": "PageSurfer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Use JSDOM to connect on given URL with fake browser agent and return content of window variable",
   "main": "lib/pagesurfer.js",
   "scripts": {
