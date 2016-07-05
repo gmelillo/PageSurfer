@@ -70,11 +70,19 @@ clickOnPageNoApi = (url, callback) ->
 # @param {error} Error is null in case of success
 # @param {window} windows variable of emulated browser
 ###
-defaultCallBack = (errors, window) ->
+printCallBack = (errors, window) ->
 	if errors
 		console.log errors
 	else
 		console.log window.location.href
+
+###*
+# Null callback for clickOnPage (it just do nothing)
+# @param {error} Error is null in case of success
+# @param {window} windows variable of emulated browser
+###
+nullCallBack = (errors, window) ->
+	return
 
 ###*
  * Exprt usable functions
@@ -86,12 +94,14 @@ module.exports = (api) ->
 		if api
 			return {
 				'clickOnPage': clickOnPage,
-				'defaultCallBack', defaultCallBack
+				'printCallBack', printCallBack,
+				'nullCallBack': nullCallBack
 			}
 		else
 			return {
 				'clickOnPage': clickOnPage,
-				'defaultCallBack', defaultCallBack
+				'printCallBack', printCallBack,
+				'nullCallBack': nullCallBack
 			}
 	if typeof api == 'object'
 		return {
@@ -107,5 +117,6 @@ module.exports = (api) ->
 					scripts: ["http://code.jquery.com/jquery.js"],
 					done: callback
 				}
-			, 'defaultCallBack', defaultCallBack
+			, 'printCallBack': printCallBack,
+			'nullCallBack': nullCallBack
 		}
