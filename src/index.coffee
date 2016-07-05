@@ -5,6 +5,8 @@
 jsdom = require 'node-jsdom'
 request = require 'request'
 
+p_proxy = null
+
 ###*
 # Retrieve url and pass windows content to the callback function to parse the content
 # Example:
@@ -26,6 +28,7 @@ clickOnPage = (url, callback) ->
 				headers: {
 					'User-Agent': ua
 				},
+				proxy: p_proxy,
 				scripts: ["http://code.jquery.com/jquery.js"],
 				done: callback
 			}
@@ -61,6 +64,7 @@ clickOnPageNoApi = (url, callback) ->
 		headers: {
 			'User-Agent': user_agents[randomIntInc 0, (user_agents.length - 1)]
 		},
+		proxy: p_proxy
 		scripts: ["http://code.jquery.com/jquery.js"],
 		done: callback
 	}
@@ -89,7 +93,8 @@ nullCallBack = (errors, window) ->
  * @params {api} Define if API will be used to generate user agent
  * @type {Array|boolean}
 ###
-module.exports = (api) -> 
+module.exports = (api, proxy) -> 
+	p_proxy = proxy
 	if typeof api == 'boolean'
 		if api
 			return {
@@ -114,6 +119,7 @@ module.exports = (api) ->
 					headers: {
 						'User-Agent': api[randomIntInc 0, (api.length - 1)]
 					},
+					proxy: p_proxy,
 					scripts: ["http://code.jquery.com/jquery.js"],
 					done: callback
 				}
