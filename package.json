@@ -14,7 +14,7 @@
     "request": "^2.72.0"
   },
   "devDependencies": {
-    "grunt": "1.1.0",
+    "grunt": "1.2.1",
     "grunt-contrib-coffee": "2.1.0"
   }
 }
